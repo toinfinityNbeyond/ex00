@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="chef" class="com.example.ex00.sample.KoreanChef">
+
+	</bean>
+
+	<bean id="restaurant" class="com.example.ex00.sample.Restaurant">
+		<property name="chef" ref="chef"></property>
+	</bean>
+
+
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springdb"></property>
+		<property name="username" value="springuser"></property>
+		<property name="password" value="springuser"></property>
+	</bean>
+
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"></constructor-arg>
+	</bean>
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+<!--		<context:component-scan base-package="com.example.ex00.sample"/>  &lt;!&ndash;스프링이 로딩을하면서 패캐지의 컨토넌트 표시를 찾는다.&ndash;&gt;-->
+</beans>
